@@ -1,16 +1,17 @@
-version: 2.1 
- 
-jobs: 
-  build-and-test:  
-    machine: 
-      image: ubuntu-2004:202104-01 
-        
-    steps: 
-      - checkout 
-      - run: make deps 
-      - run: make test       
-workflows: 
-  basic:  
-    jobs: 
-      - build-and-test 
+version: 2.1
 
+jobs:
+  build-and-test:
+    machine:
+      image: ubuntu-2204:2024.01.2
+
+    steps:
+      - checkout
+      - run: make deps
+      - run: make test
+      - run: make docker_build
+workflows:
+  basic:
+    jobs:
+      - build-and-test
+docker_build: docker build -t hello-world-printer
